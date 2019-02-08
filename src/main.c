@@ -4,6 +4,7 @@
 #define BOARD_SIZE 100
 
 int init_chessboard(unsigned int chessboard[][BOARD_SIZE]);
+void plot_chessboard(unsigned int chessboard[][BOARD_SIZE]);
 
 
 int main(int argc, char **argv)
@@ -100,4 +101,20 @@ int init_chessboard(unsigned int chessboard[][BOARD_SIZE])
 	}
 
 	return 0;
+}
+
+
+void plot_chessboard(unsigned int chessboard[][BOARD_SIZE])
+{
+	int i, j;
+
+
+	for (i = 0; i < BOARD_SIZE; i++) {
+		for (j = 0; j < BOARD_SIZE; j++)
+			printf("%d", chessboard[i][j] % 10);
+
+		printf("\n");
+	}
+
+	return;
 }
