@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 	}
 
 
-	chessboard_theme_1(chessboard);
+	init_chessboard(1, chessboard);
 	knight_move(chessboard);
 
 	return 0;

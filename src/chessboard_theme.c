@@ -1,6 +1,19 @@
 #include "main.h"
 #include "chessboard_theme.h"
 
+
+int init_chessboard(int theme, unsigned int chessboard[][BOARD_SIZE])
+{
+	switch (theme) {
+		case 2:
+			return chessboard_theme_2(chessboard);
+		case 1:
+		default:
+			return chessboard_theme_1(chessboard);
+	}
+}
+
+
 /*
 7	8	9
 6	1	2
