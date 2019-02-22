@@ -37,6 +37,25 @@ void plot_number_chessboard(unsigned int chessboard[][BOARD_SIZE])
 }
 
 
+void plot_char_chessboard(unsigned int chessboard[][BOARD_SIZE])
+{
+	int i, j;
+
+
+	for (i = 0; i < BOARD_SIZE; i++) {
+		for (j = 0; j < BOARD_SIZE; j++)
+			if(chessboard[i][j] == 0)
+				printf("#");
+			else
+				printf(" ");
+
+		printf("\n");
+	}
+
+	return;
+}
+
+
 void knight_move(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_posY)
 {
 	int posX, posY, newPosX, newPosY;
