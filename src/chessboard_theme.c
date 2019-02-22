@@ -115,10 +115,18 @@ int chessboard_theme_2(unsigned int chessboard[][BOARD_SIZE])
 
 	n = 0;
 
-	for(i = 0; i < BOARD_SIZE; i++) {
-		for(j = 0; j <= i; j++) {
+	for (i = 0; i < BOARD_SIZE; i++) {
+		for (j = i; j >= 0; j--) {
 			n++;
-			chessboard[j][i-j] = n;
+			chessboard[i-j][j] = n;
+		}
+	}
+
+
+	for(i = 1; i < BOARD_SIZE; i++) {
+		for (j = BOARD_SIZE - 1; j >= i; j--) {
+			n++;
+			chessboard[BOARD_SIZE - j + i - 1][j] = n;
 		}
 	}
 
