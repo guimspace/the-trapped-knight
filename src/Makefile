@@ -1,4 +1,4 @@
-DEPS = main.o
+DEPS = main.o chessboard_theme.o
 EXEC = the-trapped-knight
 DATAFILES = $(wildcard *.data)
 
