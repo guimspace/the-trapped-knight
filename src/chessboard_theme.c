@@ -1,6 +1,7 @@
 #include "main.h"
 #include "chessboard_theme.h"
 
+
 int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 {
 	int dir, posX, posY;
@@ -61,7 +62,7 @@ int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 				break;
 
 			default:
-				printf("build_path(): Switch case is default.\n\n");
+				printf("chessboard_theme_1(): Switch case is default.\n\n");
 				return 1;
 		}
 
