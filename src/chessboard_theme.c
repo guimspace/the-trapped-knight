@@ -1,7 +1,11 @@
 #include "main.h"
 #include "chessboard_theme.h"
 
-
+/*
+7	8	9
+6	1	2
+5	4	3
+*/
 int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 {
 	int dir, posX, posY;
@@ -81,7 +85,12 @@ int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 	return 0;
 }
 
-
+/*
+1	2	4	7
+3	5	8
+6	9
+10
+*/
 int chessboard_theme_2(unsigned int chessboard[][BOARD_SIZE])
 {
 	int i, j;
