@@ -5,6 +5,7 @@
 int main(int argc, char **argv)
 {
 	unsigned int chessboard[BOARD_SIZE][BOARD_SIZE];
+	int posX, posY;
 	int i, j;
 
 	for (i = 0; i < BOARD_SIZE; i++) {
@@ -13,8 +14,8 @@ int main(int argc, char **argv)
 	}
 
 
-	init_chessboard(1, chessboard);
-	knight_move(chessboard);
+	init_chessboard(1, chessboard, &posX, &posY);
+	knight_move(chessboard, posX, posY);
 
 	return 0;
 }
@@ -36,7 +37,7 @@ void plot_chessboard(unsigned int chessboard[][BOARD_SIZE])
 }
 
 
-void knight_move(unsigned int chessboard[][BOARD_SIZE])
+void knight_move(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_posY)
 {
 	int posX, posY, newPosX, newPosY;
 	int jump, stepX, stepY;
@@ -46,8 +47,8 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE])
 	jump = 0;
 	isTrapped = 0;
 
-	posX = (BOARD_SIZE - 1) / 2;
-	posY = (BOARD_SIZE - 1) / 2;
+	posX = init_posX;
+	posY = init_posY;
 
 	newPosX = 0;
 	newPosY = 0;

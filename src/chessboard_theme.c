@@ -2,13 +2,17 @@
 #include "chessboard_theme.h"
 
 
-int init_chessboard(int theme, unsigned int chessboard[][BOARD_SIZE])
+int init_chessboard(int theme, unsigned int chessboard[][BOARD_SIZE], int *posX, int *posY)
 {
 	switch (theme) {
 		case 2:
+			*posX = 0;
+			*posY = 0;
 			return chessboard_theme_2(chessboard);
 		case 1:
 		default:
+			*posX = (BOARD_SIZE - 1) / 2;
+			*posY = (BOARD_SIZE - 1) / 2;
 			return chessboard_theme_1(chessboard);
 	}
 }
