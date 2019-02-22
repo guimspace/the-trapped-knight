@@ -80,3 +80,21 @@ int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 
 	return 0;
 }
+
+
+int chessboard_theme_2(unsigned int chessboard[][BOARD_SIZE])
+{
+	int i, j;
+	int n;
+
+	n = 0;
+
+	for(i = 0; i < BOARD_SIZE; i++) {
+		for(j = 0; j <= i; j++) {
+			n++;
+			chessboard[j][i-j] = n;
+		}
+	}
+
+	return 0;
+}
