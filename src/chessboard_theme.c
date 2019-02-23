@@ -9,6 +9,10 @@ int init_chessboard(int theme, unsigned int chessboard[][BOARD_SIZE], int *posX,
 			*posX = 0;
 			*posY = 0;
 			return chessboard_theme_2(chessboard);
+		case 3:
+			*posX = random() % BOARD_SIZE;
+			*posY = random() % BOARD_SIZE;
+			return chessboard_theme_3(chessboard, *posX, *posY);
 		case 1:
 		default:
 			*posX = (BOARD_SIZE - 1) / 2;
@@ -128,6 +132,43 @@ int chessboard_theme_2(unsigned int chessboard[][BOARD_SIZE])
 			n++;
 			chessboard[BOARD_SIZE - j + i - 1][j] = n;
 		}
+	}
+
+	return 0;
+}
+
+
+int chessboard_theme_3(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_posY)
+{
+	int posX, posY;
+	int list[BOARD_SIZE * BOARD_SIZE - 1];
+	int a, n, v, i;
+
+	n = init_posX + init_posY * BOARD_SIZE;
+	for (i = 0; i < n; i++)
+		list[i] = i;
+
+	i++;
+	n = BOARD_SIZE * BOARD_SIZE;
+	for (; i < n; i++)
+		list[i-1] = i;
+
+	n--;
+	chessboard[init_posX][init_posY] = 1;
+
+	a = 2;
+	while (n > 0) {
+		v = random() % n;
+
+		posX = list[v] % BOARD_SIZE;
+		posY = (list[v] - posX) / BOARD_SIZE;
+		chessboard[posX][posY] = a;
+
+		list[v] = list[n - 1];
+		list[n - 1] = 0;
+
+		a++;
+		n--;
 	}
 
 	return 0;

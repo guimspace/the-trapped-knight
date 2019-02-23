@@ -1,3 +1,4 @@
+#include <time.h>
 #include "main.h"
 #include "chessboard_theme.h"
 
@@ -7,6 +8,8 @@ int main(int argc, char **argv)
 	unsigned int chessboard[BOARD_SIZE][BOARD_SIZE];
 	int posX, posY;
 	int i, j;
+
+	srandom(time(NULL));
 
 	for (i = 0; i < BOARD_SIZE; i++) {
 		for (j = 0; j < BOARD_SIZE; j++)
