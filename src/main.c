@@ -11,10 +11,14 @@ int main(int argc, char **argv)
 
 	FILE *fSequence, *fGraph;
 
-	if ( (fSequence = fopen("./Data/sequence.dat", "w")) == NULL ) {
+	fSequence = fopen("./Data/sequence.dat", "w")
+	if (fSequence == NULL) {
 		printf("File sequece.dat coult not be opened.\n");
 		return 0;
-	} else if ( (fGraph = fopen("./Data/graph.dat", "w")) == NULL ) {
+	}
+
+	fGraph = fopen("./Data/graph.dat", "w")
+	if (fGraph == NULL) {
 		printf("File sequece.dat coult not be opened.\n");
 		return 0;
 	}
