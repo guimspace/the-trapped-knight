@@ -9,6 +9,16 @@ int main(int argc, char **argv)
 	int posX, posY;
 	int i, j;
 
+	FILE *fSequence, *fGraph;
+
+	if ( (fSequence = fopen("./Data/sequence.dat", "w")) == NULL ) {
+		printf("File sequece.dat coult not be opened.\n");
+		return 0;
+	} else if ( (fGraph = fopen("./Data/graph.dat", "w")) == NULL ) {
+		printf("File sequece.dat coult not be opened.\n");
+		return 0;
+	}
+
 	srandom(time(NULL));
 
 	for (i = 0; i < BOARD_SIZE; i++) {
@@ -19,6 +29,9 @@ int main(int argc, char **argv)
 
 	init_chessboard(1, chessboard, &posX, &posY);
 	knight_move(chessboard, posX, posY);
+
+	fclose(fSequence);
+	fclose(fGraph);
 
 	return 0;
 }
