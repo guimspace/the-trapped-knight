@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 }
 
 
-void plot_number_chessboard(unsigned int chessboard[][BOARD_SIZE])
+void plot_mod_chessboard(unsigned int chessboard[][BOARD_SIZE])
 {
 	int i, j;
 
