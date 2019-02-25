@@ -41,6 +41,24 @@ int main(int argc, char **argv)
 }
 
 
+void plot_chessboard(unsigned int chessboard[][BOARD_SIZE])
+{
+	int i, j;
+
+
+	for (i = 0; i < BOARD_SIZE; i++) {
+		printf("%d", chessboard[i][0]);
+
+		for (j = 1; j < BOARD_SIZE; j++)
+			printf("\t%d", chessboard[i][j]);
+
+		printf("\n");
+	}
+
+	return;
+}
+
+
 void plot_mod_chessboard(unsigned int chessboard[][BOARD_SIZE])
 {
 	int i, j;
