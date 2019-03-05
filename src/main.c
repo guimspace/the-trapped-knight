@@ -170,8 +170,8 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_
 
 		if (jump == 7 && value == 0)
 			return;
-
-		jump++;
+		else
+			jump++;
 
 		if (jump == 8) {
 			chessboard[posY][posX] = 0;
