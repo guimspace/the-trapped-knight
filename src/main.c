@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 
 
 	init_chessboard(1, chessboard, &knight);
-	knight_move(chessboard, knight.posX, knight.posY);
+	knight_move(chessboard, &knight);
 
 	fclose(fSequence);
 	fclose(fGraph);
@@ -102,7 +102,7 @@ void plot_char_chessboard(unsigned int chessboard[][BOARD_SIZE])
 }
 
 
-void knight_move(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_posY)
+void knight_move(unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 {
 	int posX, posY, newPosX, newPosY;
 	int jump, stepX, stepY;
@@ -112,8 +112,8 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_
 	jump = 0;
 	isTrapped = 0;
 
-	posX = init_posX;
-	posY = init_posY;
+	posX = (*knight).posX;
+	posY = (*knight).posY;
 
 	newPosX = 0;
 	newPosY = 0;
@@ -177,8 +177,19 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_
 		jump++;
 
 		if (jump == 8) {
-			if(value == 0)
+			if(value == 0) {
+				(*knight).posX = posX;
+				(*knight).posY = posY;
 				return;
+			}
+
+			(*knight).n++;
+			(*knight).s = chessboard[posY][posX];
+
+			if(chessboard[posY][posX] > (*knight).max)
+				(*knight).max = chessboard[posY][posX];
+			else if(chessboard[posY][posX] < (*knight).min)
+				(*knight).min = chessboard[posY][posX];
 
 			chessboard[posY][posX] = 0;
 

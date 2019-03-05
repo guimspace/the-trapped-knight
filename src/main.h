@@ -14,5 +14,5 @@ struct knight {
 void plot_chessboard(unsigned int chessboard[][BOARD_SIZE]);
 void plot_mod_chessboard(unsigned int chessboard[][BOARD_SIZE]);
 void plot_char_chessboard(unsigned int chessboard[][BOARD_SIZE]);
-void knight_move(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_posY);
+void knight_move(unsigned int chessboard[][BOARD_SIZE], struct knight *knight);
 bool is_out_bound(int a, int b);
