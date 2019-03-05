@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 
 	fSequence = fopen("./Data/sequence.dat", "w");
 	if (fSequence == NULL) {
-		printf("File sequece.dat coult not be opened.\n");
+		printf("File sequence.dat coult not be opened.\n");
 		return 0;
 	}
 
