@@ -153,8 +153,7 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_
 				return;
 		}
 
-		if (!(posX + stepX < 0 || posX + stepX >= BOARD_SIZE ||
-			posY + stepY < 0 || posY + stepY >= BOARD_SIZE) &&
+		if (!is_out_bound(posX + stepX, posY + stepY) &&
 			chessboard[posY + stepY][posX + stepX] != 0) {
 			if (value == 0) {
 				newPosX = posX + stepX;
@@ -184,4 +183,14 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_
 	}
 
 	return;
+}
+
+
+bool is_out_bound(int a, int b) {
+	if (a < 0 || a > BOARD_SIZE)
+		return true;
+	else if (b < 0 || b > BOARD_SIZE)
+		return true;
+	else
+		return false;
 }
