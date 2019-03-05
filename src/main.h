@@ -4,6 +4,12 @@
 #define BOARD_SIZE 100
 
 typedef enum {false, true} bool;
+struct knight {
+	int posX, posY;
+	int max, min;
+	int s, n;
+	int r;
+};
 
 void plot_chessboard(unsigned int chessboard[][BOARD_SIZE]);
 void plot_mod_chessboard(unsigned int chessboard[][BOARD_SIZE]);
