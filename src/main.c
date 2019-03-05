@@ -155,8 +155,11 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], int init_posX, int init_
 
 		if (posX + stepX < 0 || posX + stepX >= BOARD_SIZE ||
 				posY + stepY < 0 || posY + stepY >= BOARD_SIZE) {
-			jump++;
-		} else if (chessboard[posY + stepY][posX + stepX] != 0) {
+			printf("The knight is cornered.\n\n");
+			return;
+		}
+
+		if (chessboard[posY + stepY][posX + stepX] != 0) {
 			if (value == 0) {
 				newPosX = posX + stepX;
 				newPosY = posY + stepY;
