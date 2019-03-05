@@ -2,21 +2,21 @@
 #include "chessboard_theme.h"
 
 
-int init_chessboard(int theme, unsigned int chessboard[][BOARD_SIZE], int *posX, int *posY)
+int init_chessboard(int theme, unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 {
 	switch (theme) {
 		case 2:
-			*posX = 0;
-			*posY = 0;
+			(*knight).posX = 0;
+			(*knight).posY = 0;
 			return chessboard_theme_2(chessboard);
 		case 3:
-			*posX = random() % BOARD_SIZE;
-			*posY = random() % BOARD_SIZE;
-			return chessboard_theme_3(chessboard, *posX, *posY);
+			(*knight).posX = random() % BOARD_SIZE;
+			(*knight).posY = random() % BOARD_SIZE;
+			return chessboard_theme_3(chessboard, (*knight).posX, (*knight).posY);
 		case 1:
 		default:
-			*posX = (BOARD_SIZE - 1) / 2;
-			*posY = (BOARD_SIZE - 1) / 2;
+			(*knight).posX = (BOARD_SIZE - (BOARD_SIZE % 2)) / 2;
+			(*knight).posY = (*knight).posX;
 			return chessboard_theme_1(chessboard);
 	}
 }

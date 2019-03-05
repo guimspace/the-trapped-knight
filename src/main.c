@@ -6,7 +6,7 @@
 int main(int argc, char **argv)
 {
 	unsigned int chessboard[BOARD_SIZE][BOARD_SIZE];
-	int posX, posY;
+	struct knight knight;
 	int i, j;
 
 	FILE *fSequence, *fGraph;
@@ -30,9 +30,17 @@ int main(int argc, char **argv)
 			chessboard[i][j] = 0;
 	}
 
+	knight.posX = 0;
+	knight.posY = 0;
+	knight.max = 0;
+	knight.min = 0;
+	knight.n = 0;
+	knight.r = 0;
+	knight.s = 0;
 
-	init_chessboard(1, chessboard, &posX, &posY);
-	knight_move(chessboard, posX, posY);
+
+	init_chessboard(1, chessboard, &knight);
+	knight_move(chessboard, knight.posX, knight.posY);
 
 	fclose(fSequence);
 	fclose(fGraph);
