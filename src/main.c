@@ -188,8 +188,6 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 
 			if(chessboard[posY][posX] > (*knight).max)
 				(*knight).max = chessboard[posY][posX];
-			else if(chessboard[posY][posX] < (*knight).min)
-				(*knight).min = chessboard[posY][posX];
 
 			chessboard[posY][posX] = 0;
 
