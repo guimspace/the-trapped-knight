@@ -107,10 +107,12 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 	int posX, posY, newPosX, newPosY;
 	int jump, stepX, stepY;
 	int value;
-	int isTrapped;
+	int k, maxK;
+
+	k = 0;
+	maxK = BOARD_SIZE * BOARD_SIZE;
 
 	jump = 0;
-	isTrapped = 0;
 
 	posX = (*knight).posX;
 	posY = (*knight).posY;
@@ -122,7 +124,7 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 	value = 0;
 
 
-	while (!isTrapped) {
+	while (k < maxK) {
 		switch (jump) {
 			case 0:
 				stepX = 2;
@@ -196,6 +198,7 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 
 			value = 0;
 			jump = 0;
+			k++;
 		}
 	}
 
