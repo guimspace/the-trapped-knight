@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	struct knight knight;
 	int i, j;
 
-	FILE *fSequence, *fGraph;
+	FILE *fSequence, *fGraph, *fStats;
 
 	fSequence = fopen("./Data/sequence.dat", "w");
 	if (fSequence == NULL) {
@@ -20,6 +20,12 @@ int main(int argc, char **argv)
 	fGraph = fopen("./Data/graph.dat", "w");
 	if (fGraph == NULL) {
 		printf("File sequece.dat coult not be opened.\n");
+		return 0;
+	}
+
+	fStats = fopen("./Data/stats.dat", "w");
+	if (fStats == NULL) {
+		printf("File stats.dat coult not be opened.\n");
 		return 0;
 	}
 
@@ -42,8 +48,13 @@ int main(int argc, char **argv)
 	init_chessboard(1, chessboard, &knight);
 	knight_move(chessboard, &knight);
 
+	fprintf(fStats, "pos=(%d, %d)\n", knight.posX, knight.posY);
+	fprintf(fStats, "max=%d\n", knight.max);
+	fprintf(fStats, "s=%d\nn=%d\n", knight.s, knight.n);
+
 	fclose(fSequence);
 	fclose(fGraph);
+	fclose(fStats);
 
 	return 0;
 }
