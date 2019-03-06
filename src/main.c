@@ -43,6 +43,10 @@ int main(int argc, char **argv)
 	knight.n = 0;
 	knight.r = 0;
 	knight.s = 0;
+	knight.limits.plusX = 0;
+	knight.limits.plusY = 0;
+	knight.limits.minusX = 0;
+	knight.limits.minusY = 0;
 
 
 	init_chessboard(1, chessboard, &knight);
@@ -51,6 +55,11 @@ int main(int argc, char **argv)
 	fprintf(fStats, "pos=(%d, %d)\n", knight.posX, knight.posY);
 	fprintf(fStats, "max=%d\n", knight.max);
 	fprintf(fStats, "s=%d\nn=%d\n", knight.s, knight.n);
+	fprintf(fStats, "\n");
+	fprintf(fStats, "plus X=%d\n", knight.limits.plusX);
+	fprintf(fStats, "minus X=%d\n", knight.limits.minusX);
+	fprintf(fStats, "plus Y=%d\n", knight.limits.plusY);
+	fprintf(fStats, "minus Y=%d\n", knight.limits.minusY);
 
 	fclose(fSequence);
 	fclose(fPlot);
@@ -134,6 +143,11 @@ void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_S
 	stepY = 0;
 	value = 0;
 
+	(*knight).limits.plusX = posX;
+	(*knight).limits.plusY = posY;
+	(*knight).limits.minusX = posX;
+	(*knight).limits.minusY = posY;
+
 
 	while (k < maxK) {
 		if (select_jump(jump, &stepX, &stepY) != 0)
@@ -169,6 +183,16 @@ void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_S
 
 			if(chessboard[posY][posX] > (*knight).max)
 				(*knight).max = chessboard[posY][posX];
+
+			if(posX > (*knight).limits.plusX)
+				(*knight).limits.plusX = posX;
+			else if(posX < (*knight).limits.minusX)
+				(*knight).limits.minusX = posX;
+
+			if(posY > (*knight).limits.plusY)
+				(*knight).limits.plusY = posY;
+			else if(posY < (*knight).limits.minusY)
+				(*knight).limits.minusY = posY;
 
 			fprintf(fSequence, "%d, ", chessboard[posY][posX]);
 			fprintf(fPlot, "%d\t%d\n", posX, posY);
