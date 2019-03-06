@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 
 
 	init_chessboard(1, chessboard, &knight);
-	knight_move(chessboard, &knight);
+	knight_move(fSequence, fGraph, chessboard, &knight);
 
 	fprintf(fStats, "pos=(%d, %d)\n", knight.posX, knight.posY);
 	fprintf(fStats, "max=%d\n", knight.max);
@@ -113,7 +113,7 @@ void plot_char_chessboard(unsigned int chessboard[][BOARD_SIZE])
 }
 
 
-void knight_move(unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
+void knight_move(FILE *fSequence, FILE *fGraph, unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 {
 	int posX, posY, newPosX, newPosY;
 	int jump, stepX, stepY;
@@ -133,6 +133,8 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 	stepX = 0;
 	stepY = 0;
 	value = 0;
+
+	fprintf(fGraph, "{ ");
 
 
 	while (k < maxK) {
@@ -193,15 +195,21 @@ void knight_move(unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 			if(value == 0) {
 				(*knight).posX = posX;
 				(*knight).posY = posY;
+
+				(*knight).s = chessboard[posY][posX];
+
+				fprintf(fSequence, "%d", chessboard[posY][posX]);
+				fprintf(fGraph, "0->0 }");
 				return;
 			}
 
 			(*knight).n++;
-			(*knight).s = chessboard[posY][posX];
 
 			if(chessboard[posY][posX] > (*knight).max)
 				(*knight).max = chessboard[posY][posX];
 
+			fprintf(fSequence, "%d, ", chessboard[posY][posX]);
+			fprintf(fGraph, "%d->%d, ", chessboard[posY][posX], chessboard[newPosY][newPosX]);
 			chessboard[posY][posX] = 0;
 
 			posX = newPosX;
