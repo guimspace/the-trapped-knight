@@ -15,7 +15,7 @@ int init_chessboard(int theme, unsigned int chessboard[][BOARD_SIZE], struct kni
 			return chessboard_theme_3(chessboard, (*knight).posX, (*knight).posY);
 		case 1:
 		default:
-			(*knight).posX = (BOARD_SIZE - (BOARD_SIZE % 2)) / 2;
+			(*knight).posX = BOARD_SIZE / 2;
 			(*knight).posY = (*knight).posX;
 			return chessboard_theme_1(chessboard);
 	}
@@ -32,7 +32,7 @@ int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 	int dir, posX, posY;
 	int incX, incY;
 	int stepsX, stepsY;
-	int i, n, N;
+	int i, n, N, l;
 
 	n = 0;
 	N = 0;
@@ -40,11 +40,16 @@ int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 	stepsY = 0;
 
 	dir = 0;
-	posX = (BOARD_SIZE - 1) / 2;
-	posY = (BOARD_SIZE - 1) / 2;
+	posX = BOARD_SIZE / 2;
+	posY = posX;
+
+	if(BOARD_SIZE % 2)
+		l = BOARD_SIZE;
+	else
+		l = BOARD_SIZE - 1;
 
 
-	while (N < BOARD_SIZE) {
+	while (N < l) {
 		switch (dir) {
 			case 0:
 				incX = 1;
