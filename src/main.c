@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	struct knight knight;
 	int i, j;
 
-	FILE *fSequence, *fGraph, *fStats;
+	FILE *fSequence, *fPlot, *fStats;
 
 	fSequence = fopen("./Data/sequence.dat", "w");
 	if (fSequence == NULL) {
@@ -17,9 +17,9 @@ int main(int argc, char **argv)
 		return 0;
 	}
 
-	fGraph = fopen("./Data/graph.dat", "w");
-	if (fGraph == NULL) {
-		printf("File sequece.dat coult not be opened.\n");
+	fPlot = fopen("./Data/plot.dat", "w");
+	if (fPlot == NULL) {
+		printf("File plot.dat coult not be opened.\n");
 		return 0;
 	}
 
@@ -46,14 +46,14 @@ int main(int argc, char **argv)
 
 
 	init_chessboard(1, chessboard, &knight);
-	knight_move(fSequence, fGraph, chessboard, &knight);
+	knight_move(fSequence, fPlot, chessboard, &knight);
 
 	fprintf(fStats, "pos=(%d, %d)\n", knight.posX, knight.posY);
 	fprintf(fStats, "max=%d\n", knight.max);
 	fprintf(fStats, "s=%d\nn=%d\n", knight.s, knight.n);
 
 	fclose(fSequence);
-	fclose(fGraph);
+	fclose(fPlot);
 	fclose(fStats);
 
 	return 0;
@@ -113,7 +113,7 @@ void plot_char_chessboard(unsigned int chessboard[][BOARD_SIZE])
 }
 
 
-void knight_move(FILE *fSequence, FILE *fGraph, unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
+void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 {
 	int posX, posY, newPosX, newPosY;
 	int jump, stepX, stepY;
@@ -133,8 +133,6 @@ void knight_move(FILE *fSequence, FILE *fGraph, unsigned int chessboard[][BOARD_
 	stepX = 0;
 	stepY = 0;
 	value = 0;
-
-	fprintf(fGraph, "{ ");
 
 
 	while (k < maxK) {
@@ -199,7 +197,6 @@ void knight_move(FILE *fSequence, FILE *fGraph, unsigned int chessboard[][BOARD_
 				(*knight).s = chessboard[posY][posX];
 
 				fprintf(fSequence, "%d", chessboard[posY][posX]);
-				fprintf(fGraph, "0->0 }");
 				return;
 			}
 
@@ -209,7 +206,7 @@ void knight_move(FILE *fSequence, FILE *fGraph, unsigned int chessboard[][BOARD_
 				(*knight).max = chessboard[posY][posX];
 
 			fprintf(fSequence, "%d, ", chessboard[posY][posX]);
-			fprintf(fGraph, "%d->%d, ", chessboard[posY][posX], chessboard[newPosY][newPosX]);
+			fprintf(fPlot, "%d\t%d\n", posX, posY);
 			chessboard[posY][posX] = 0;
 
 			posX = newPosX;
