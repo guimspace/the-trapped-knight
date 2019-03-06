@@ -136,43 +136,8 @@ void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_S
 
 
 	while (k < maxK) {
-		switch (jump) {
-			case 0:
-				stepX = 2;
-				stepY = 1;
-				break;
-			case 1:
-				stepX = 1;
-				stepY = 2;
-				break;
-			case 2:
-				stepX = -1;
-				stepY = 2;
-				break;
-			case 3:
-				stepX = -2;
-				stepY = 1;
-				break;
-			case 4:
-				stepX = -2;
-				stepY = -1;
-				break;
-			case 5:
-				stepX = -1;
-				stepY = -2;
-				break;
-			case 6:
-				stepX = 1;
-				stepY = -2;
-				break;
-			case 7:
-				stepX = 2;
-				stepY = -1;
-				break;
-			default:
-				printf("knight_move(): Switch case is default.");
-				return;
-		}
+		if (select_jump(jump, &stepX, &stepY) != 0)
+			return;
 
 		if (!is_out_bound(posX + stepX, posY + stepY) &&
 			chessboard[posY + stepY][posX + stepX] != 0) {
@@ -229,4 +194,47 @@ bool is_out_bound(int a, int b) {
 		return true;
 	else
 		return false;
+}
+
+
+int select_jump(int jump, int *stepX, int *stepY) {
+	switch (jump) {
+		case 0:
+			*stepX = 2;
+			*stepY = 1;
+			break;
+		case 1:
+			*stepX = 1;
+			*stepY = 2;
+			break;
+		case 2:
+			*stepX = -1;
+			*stepY = 2;
+			break;
+		case 3:
+			*stepX = -2;
+			*stepY = 1;
+			break;
+		case 4:
+			*stepX = -2;
+			*stepY = -1;
+			break;
+		case 5:
+			*stepX = -1;
+			*stepY = -2;
+			break;
+		case 6:
+			*stepX = 1;
+			*stepY = -2;
+			break;
+		case 7:
+			*stepX = 2;
+			*stepY = -1;
+			break;
+		default:
+			printf("knight_move(): Switch case is default.");
+			return 1;
+	}
+
+	return 0;
 }
