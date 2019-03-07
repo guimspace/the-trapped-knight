@@ -1,0 +1,92 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3300,         84]
+NotebookOptionsPosition[      2923,         70]
+NotebookOutlinePosition[      3256,         85]
+CellTagsIndexPosition[      3213,         82]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"path", "=", "\"\<plot.dat\>\""}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"Import", "[", 
+    RowBox[{"path", ",", "\"\<Table\>\""}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{3.760985069145146*^9},
+ CellLabel->"In[1]:=",ExpressionUUID->"2c0a658e-4d2c-43c3-b445-dd3d223e8590"],
+
+Cell[BoxData[{
+ RowBox[{"plot", "=", 
+  RowBox[{"ListLinePlot", "[", "\[IndentingNewLine]", 
+   RowBox[{"data", ",", "\[IndentingNewLine]", 
+    RowBox[{"ColorFunction", "\[Rule]", 
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x", ",", "y"}], "}"}], ",", 
+       RowBox[{"Blend", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"Yellow", ",", "Red"}], "}"}], ",", 
+         RowBox[{"x", "+", "y"}]}], "]"}]}], "]"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"PlotStyle", "\[Rule]", "Thick"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<plot.png\>\"", ",", "plot", ",", "\"\<PNG\>\""}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.760886231092924*^9, 3.760886231109433*^9}, {
+   3.760886276350129*^9, 3.760886280294497*^9}, {3.7608863774945097`*^9, 
+   3.7608863781740417`*^9}, {3.760886610023115*^9, 3.7608866170821667`*^9}, {
+   3.760887980579112*^9, 3.7608879813559227`*^9}, {3.7608884025955677`*^9, 
+   3.7608884027708263`*^9}, 3.7608884679806757`*^9, 3.7608890681732492`*^9, {
+   3.7608891542258053`*^9, 3.7608891857247353`*^9}, {3.7608892306028214`*^9, 
+   3.760889254673365*^9}, {3.7608892851348963`*^9, 3.760889318706521*^9}, {
+   3.760895398659051*^9, 3.760895463602345*^9}, {3.760895528911929*^9, 
+   3.7608955732889633`*^9}, {3.760895681431106*^9, 3.760895699360421*^9}, {
+   3.760895745573333*^9, 3.760895749630378*^9}, {3.760898301240274*^9, 
+   3.760898303869824*^9}, {3.760981075268455*^9, 3.760981078181302*^9}, {
+   3.7609811261689253`*^9, 3.760981158699551*^9}, {3.760981334230193*^9, 
+   3.760981348742382*^9}, {3.760981411380639*^9, 3.760981427899452*^9}, {
+   3.760984236451289*^9, 3.760984270896611*^9}, {3.760985113361533*^9, 
+   3.7609851389820137`*^9}},ExpressionUUID->"ae2cdec5-c607-4fec-9fa3-\
+6e610e76dc11"]
+},
+WindowSize->{1366, 713},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 335, 8, 55, "Input",ExpressionUUID->"2c0a658e-4d2c-43c3-b445-dd3d223e8590"],
+Cell[896, 30, 2023, 38, 193, "Input",ExpressionUUID->"ae2cdec5-c607-4fec-9fa3-6e610e76dc11"]
+}
+]
+*)
+
