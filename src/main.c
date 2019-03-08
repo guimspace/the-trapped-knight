@@ -109,11 +109,12 @@ void plot_char_chessboard(unsigned int chessboard[][BOARD_SIZE])
 
 
 	for (i = 0; i < BOARD_SIZE; i++) {
-		for (j = 0; j < BOARD_SIZE; j++)
-			if(chessboard[i][j] == 0)
+		for (j = 0; j < BOARD_SIZE; j++) {
+			if (chessboard[i][j] == 0)
 				printf("#");
 			else
 				printf(" ");
+		}
 
 		printf("\n");
 	}
@@ -181,17 +182,17 @@ void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_S
 
 			(*knight).n++;
 
-			if(chessboard[posY][posX] > (*knight).max)
+			if (chessboard[posY][posX] > (*knight).max)
 				(*knight).max = chessboard[posY][posX];
 
-			if(posX > (*knight).limits.plusX)
+			if (posX > (*knight).limits.plusX)
 				(*knight).limits.plusX = posX;
-			else if(posX < (*knight).limits.minusX)
+			else if (posX < (*knight).limits.minusX)
 				(*knight).limits.minusX = posX;
 
-			if(posY > (*knight).limits.plusY)
+			if (posY > (*knight).limits.plusY)
 				(*knight).limits.plusY = posY;
-			else if(posY < (*knight).limits.minusY)
+			else if (posY < (*knight).limits.minusY)
 				(*knight).limits.minusY = posY;
 
 			fprintf(fSequence, "%d, ", chessboard[posY][posX]);

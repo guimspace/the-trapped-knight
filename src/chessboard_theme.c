@@ -55,8 +55,7 @@ int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 				incX = 1;
 				incY = 0;
 
-				stepsX++;
-				N = stepsX;
+				N = ++stepsX;
 
 				dir++;
 				break;
@@ -65,8 +64,7 @@ int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 				incX = 0;
 				incY = 1;
 
-				stepsY++;
-				N = stepsY;
+				N = ++stepsY;
 
 				dir++;
 				break;
@@ -75,8 +73,7 @@ int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 				incX = -1;
 				incY = 0;
 
-				stepsX++;
-				N = stepsX;
+				N = ++stepsX;
 
 				dir++;
 				break;
@@ -85,8 +82,7 @@ int chessboard_theme_1(unsigned int chessboard[][BOARD_SIZE])
 				incX = 0;
 				incY = -1;
 
-				stepsY++;
-				N = stepsY;
+				N = ++stepsY;
 
 				dir = 0;
 				break;
@@ -125,18 +121,14 @@ int chessboard_theme_2(unsigned int chessboard[][BOARD_SIZE])
 	n = 0;
 
 	for (i = 0; i < BOARD_SIZE; i++) {
-		for (j = i; j >= 0; j--) {
-			n++;
-			chessboard[i-j][j] = n;
-		}
+		for (j = i; j >= 0; j--)
+			chessboard[i-j][j] = ++n;
 	}
 
 
 	for(i = 1; i < BOARD_SIZE; i++) {
-		for (j = BOARD_SIZE - 1; j >= i; j--) {
-			n++;
-			chessboard[BOARD_SIZE - j + i - 1][j] = n;
-		}
+		for (j = BOARD_SIZE - 1; j >= i; j--)
+			chessboard[BOARD_SIZE - j + i - 1][j] = ++n;
 	}
 
 	return 0;
