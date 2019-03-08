@@ -127,10 +127,10 @@ void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_S
 	int posX, posY, newPosX, newPosY;
 	int jump, stepX, stepY;
 	int value;
-	int k, maxK;
+	unsigned int k, maxK;
 
 	k = 0;
-	maxK = BOARD_SIZE * BOARD_SIZE;
+	maxK = 8 * BOARD_SIZE * BOARD_SIZE;
 
 	jump = 0;
 
@@ -203,8 +203,9 @@ void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_S
 
 			value = 0;
 			jump = 0;
-			k++;
 		}
+
+		k++;
 	}
 
 	return;
