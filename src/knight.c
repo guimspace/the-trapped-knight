@@ -63,6 +63,7 @@ void knight_move(struct str_files files, unsigned int chessboard[][BOARD_SIZE], 
 
 				(*knight).s = chessboard[posY][posX];
 
+				fprintf(files.fPlot, "%d\t%d\n", posX, posY);
 				fprintf(files.fSequence, "%d", chessboard[posY][posX]);
 				return;
 			}
