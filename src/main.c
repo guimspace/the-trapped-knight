@@ -1,33 +1,21 @@
 #include <time.h>
 #include "main.h"
 #include "chessboard_theme.h"
+#include "file_manager.h"
 
 
 int main(int argc, char **argv)
 {
+	int c, i, j;
 	unsigned int chessboard[BOARD_SIZE][BOARD_SIZE];
 	struct knight knight;
-	int i, j;
+	struct str_files files;
 
-	FILE *fSequence, *fPlot, *fStats;
 
-	fSequence = fopen("./Data/sequence.dat", "w");
-	if (fSequence == NULL) {
-		printf("File sequence.dat coult not be opened.\n");
+	c = 1;
+	c = open_files(&files);
+	if(c)
 		return 0;
-	}
-
-	fPlot = fopen("./Data/plot.dat", "w");
-	if (fPlot == NULL) {
-		printf("File plot.dat coult not be opened.\n");
-		return 0;
-	}
-
-	fStats = fopen("./Data/stats.dat", "w");
-	if (fStats == NULL) {
-		printf("File stats.dat coult not be opened.\n");
-		return 0;
-	}
 
 	srandom(time(NULL));
 
@@ -50,20 +38,18 @@ int main(int argc, char **argv)
 
 
 	init_chessboard(1, chessboard, &knight);
-	knight_move(fSequence, fPlot, chessboard, &knight);
+	knight_move(files, chessboard, &knight);
 
-	fprintf(fStats, "pos=(%d, %d)\n", knight.posX, knight.posY);
-	fprintf(fStats, "max=%d\n", knight.max);
-	fprintf(fStats, "s=%d\nn=%d\n", knight.s, knight.n);
-	fprintf(fStats, "\n");
-	fprintf(fStats, "plus X=%d\n", knight.limits.plusX);
-	fprintf(fStats, "minus X=%d\n", knight.limits.minusX);
-	fprintf(fStats, "plus Y=%d\n", knight.limits.plusY);
-	fprintf(fStats, "minus Y=%d\n", knight.limits.minusY);
+	fprintf(files.fStats, "pos=(%d, %d)\n", knight.posX, knight.posY);
+	fprintf(files.fStats, "max=%d\n", knight.max);
+	fprintf(files.fStats, "s=%d\nn=%d\n", knight.s, knight.n);
+	fprintf(files.fStats, "\n");
+	fprintf(files.fStats, "plus X=%d\n", knight.limits.plusX);
+	fprintf(files.fStats, "minus X=%d\n", knight.limits.minusX);
+	fprintf(files.fStats, "plus Y=%d\n", knight.limits.plusY);
+	fprintf(files.fStats, "minus Y=%d\n", knight.limits.minusY);
 
-	fclose(fSequence);
-	fclose(fPlot);
-	fclose(fStats);
+	close_files(&files);
 
 	return 0;
 }
@@ -123,7 +109,7 @@ void plot_char_chessboard(unsigned int chessboard[][BOARD_SIZE])
 }
 
 
-void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
+void knight_move(struct str_files files, unsigned int chessboard[][BOARD_SIZE], struct knight *knight)
 {
 	int posX, posY, newPosX, newPosY;
 	int jump, stepX, stepY;
@@ -149,21 +135,29 @@ void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_S
 	(*knight).limits.minusX = posX;
 	(*knight).limits.minusY = posY;
 
-
 	while (k < maxK) {
-		if (select_jump(jump, &stepX, &stepY) != 0)
+		if (select_jump(jump, &stepX, &stepY) != 0) {
+			fprintf(files.fLog, "%d:%d\tjump=%d\tbad-jump\n",
+				k, knight->n, jump);
 			return;
+		}
 
-		if (!is_out_bound(posX + stepX, posY + stepY) &&
-			chessboard[posY + stepY][posX + stepX] != 0) {
+		if(is_out_bound(posX + stepX, posY + stepY)) {
+			fprintf(files.fLog, "%d:%d\tjump=%d\tout-of-bounds\n",
+				k, knight->n, jump);
+		} else if (chessboard[posY + stepY][posX + stepX] != 0) {
 			if (value == 0) {
 				newPosX = posX + stepX;
 				newPosY = posY + stepY;
 				value = chessboard[newPosY][newPosX];
+				fprintf(files.fLog, "%d:%d\tjump=%d\tfirst-value=%d\n",
+					k, knight->n, jump, value);
 			} else if (chessboard[posY + stepY][posX + stepX] < value) {
 				newPosX = posX + stepX;
 				newPosY = posY + stepY;
 				value = chessboard[newPosY][newPosX];
+				fprintf(files.fLog, "%d:%d\tjump=%d\tnext-value=%d\n",
+					k, knight->n, jump, value);
 			}
 		}
 
@@ -176,7 +170,7 @@ void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_S
 
 				(*knight).s = chessboard[posY][posX];
 
-				fprintf(fSequence, "%d", chessboard[posY][posX]);
+				fprintf(files.fSequence, "%d", chessboard[posY][posX]);
 				return;
 			}
 
@@ -195,8 +189,8 @@ void knight_move(FILE *fSequence, FILE *fPlot, unsigned int chessboard[][BOARD_S
 			else if (posY < (*knight).limits.minusY)
 				(*knight).limits.minusY = posY;
 
-			fprintf(fSequence, "%d, ", chessboard[posY][posX]);
-			fprintf(fPlot, "%d\t%d\n", posX, posY);
+			fprintf(files.fSequence, "%d, ", chessboard[posY][posX]);
+			fprintf(files.fPlot, "%d\t%d\n", posX, posY);
 			chessboard[posY][posX] = 0;
 
 			posX = newPosX;
