@@ -23,9 +23,6 @@ struct str_files {
 	FILE *fLog;
 };
 
-void plot_chessboard(unsigned int chessboard[][BOARD_SIZE]);
-void plot_mod_chessboard(unsigned int chessboard[][BOARD_SIZE]);
-void plot_char_chessboard(unsigned int chessboard[][BOARD_SIZE]);
 void knight_move(struct str_files files, unsigned int chessboard[][BOARD_SIZE], struct knight *knight);
 bool is_out_bound(int a, int b);
 int select_jump(int jump, int *stepX, int *stepY);
