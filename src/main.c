@@ -8,11 +8,16 @@
 
 int main(int argc, char **argv)
 {
+	int theme;
 	int c, i, j;
 	unsigned int chessboard[BOARD_SIZE][BOARD_SIZE];
 	struct knight knight;
 	struct str_files files;
 
+	if(argc > 1)
+		theme = atoi(argv[1]);
+	else
+		theme = 1;
 
 	c = 1;
 	c = open_files(&files);
@@ -39,7 +44,7 @@ int main(int argc, char **argv)
 	knight.limits.minusY = 0;
 
 
-	init_chessboard(1, chessboard, &knight);
+	init_chessboard(theme, chessboard, &knight);
 	fprintf(files.fStats, "%d\t%d\n", knight.posX, knight.posY);
 
 	knight_move(files, chessboard, &knight);
