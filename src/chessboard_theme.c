@@ -13,6 +13,10 @@ int init_chessboard(int theme, unsigned int chessboard[][BOARD_SIZE], struct kni
 			(*knight).posX = random() % BOARD_SIZE;
 			(*knight).posY = random() % BOARD_SIZE;
 			return chessboard_theme_3(chessboard, (*knight).posX, (*knight).posY);
+		case 4:
+			(*knight).posX = 0;
+			(*knight).posY = 0;
+			return chessboard_theme_4(chessboard);
 		case 1:
 		default:
 			(*knight).posX = BOARD_SIZE / 2;
@@ -166,6 +170,40 @@ int chessboard_theme_3(unsigned int chessboard[][BOARD_SIZE], int init_posX, int
 
 		a++;
 		n--;
+	}
+
+	return 0;
+}
+
+
+/*
+1	20	21
+2	19	22
+3	18	23
+...	...	...
+10	11	30
+*/
+int chessboard_theme_4(unsigned int chessboard[][BOARD_SIZE])
+{
+	int i, j;
+	int n;
+
+	i = 0;
+	n = 0;
+
+	while (j < BOARD_SIZE) {
+		for (i = 0; i < BOARD_SIZE; i++)
+			chessboard[i][j] = ++n;
+
+		j++;
+		if (j == BOARD_SIZE)
+			break;
+
+		i--;
+		for (; i >= 0; i--)
+			chessboard[i][j] = ++n;
+
+		j++;
 	}
 
 	return 0;
