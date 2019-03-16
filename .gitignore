@@ -1,3 +1,4 @@
 the-trapped-knight
 *.o
 *.data
+*.log
