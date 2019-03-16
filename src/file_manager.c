@@ -16,7 +16,7 @@ int open_files(struct str_files *files)
 		return 1;
 	}
 
-	files->fStats = fopen("./Data/stats.dat", "w");
+	files->fStats = fopen("./Data/stats.data", "w");
 	if (files->fStats == NULL) {
 		printf("File stats.data coult not be opened.\n");
 		return 1;
