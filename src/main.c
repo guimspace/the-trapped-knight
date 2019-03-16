@@ -40,16 +40,16 @@ int main(int argc, char **argv)
 
 
 	init_chessboard(1, chessboard, &knight);
+	fprintf(files.fStats, "%d\t%d\n", knight.posX, knight.posY);
+
 	knight_move(files, chessboard, &knight);
 
-	fprintf(files.fStats, "pos=(%d, %d)\n", knight.posX, knight.posY);
-	fprintf(files.fStats, "max=%d\n", knight.max);
-	fprintf(files.fStats, "s=%d\nn=%d\n", knight.s, knight.n);
-	fprintf(files.fStats, "\n");
-	fprintf(files.fStats, "plus X=%d\n", knight.limits.plusX);
-	fprintf(files.fStats, "minus X=%d\n", knight.limits.minusX);
-	fprintf(files.fStats, "plus Y=%d\n", knight.limits.plusY);
-	fprintf(files.fStats, "minus Y=%d\n", knight.limits.minusY);
+	fprintf(files.fStats, "%d\t%d\n", knight.posX, knight.posY);
+
+	fprintf(files.fStats, "%d\t%d\n%d\n", knight.n, knight.s, knight.max);
+
+	fprintf(files.fStats, "%d\t%d\n", knight.limits.minusX, knight.limits.plusX);
+	fprintf(files.fStats, "%d\t%d\n", knight.limits.minusY, knight.limits.plusY);
 
 	close_files(&files);
 
